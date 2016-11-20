@@ -7,8 +7,20 @@ public class main {
         tab[0]= new RobotVirtuel("test");
         tab[1]= new RobotNG(2,3,"test1","Est" );
         tab[2]= new RobotNG(7,4,"test2","Nord" );
-        for(int i=0;i<3;i++){
+       for(int i=0;i<3;i++){
             tab[i].avance();
+           tab[i].affiche();
+        }
+        for(int i=1;i<3;i++){
+            ( (RobotNG)  tab[i]).avance(3);
+            tab[i].affiche();
+        }
+        for(int i=0;i<3;i++){
+            tab[i].droite();
+            tab[i].affiche();
+        }
+        for(int i=1;i<3;i++){
+            ( (RobotNG)  tab[i]).demiTour();
             tab[i].affiche();
         }
     }
