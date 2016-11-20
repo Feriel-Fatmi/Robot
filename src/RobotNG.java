@@ -2,63 +2,103 @@
  * Created by Fatmi on 20/11/2016.
  */
 public class RobotNG extends RobotVirtuel {
-    public RobotNG (int x,int y,String nom, String direction){
-        super(x, y, nom, direction);
+     private String turbo;
+
+    public RobotNG(String nom,int x,int y,String direction,String turbo) {
+        super(nom,x,y,direction);
+        this.turbo=turbo;
     }
-    /*public void avance(int nb){
-    for(int i=0;i<=nb;i++){
+
+    //solution1
+ /*  public void avance(int nb){
+    for(int i=0;i<nb;i++){
         avance();
-    }
-}*/
+    }}
     public void gauche(){
-        for(int j=0; j<=3; j++){
+        for(int i=0;i<3;i++){
             droite();
         }
     }
-    /* public void demitour(){
-         for(int k=0;k<=2;k++){
-             droite();
-         }
-     }*/
-    public void avance(int nb){
-        switch(getDirection()){
-            case "Est":
-                setX(getX()+nb);
-            case "Nord":
-                setY(getY()+nb);
-            case"Sud":
-                setY(getY()-nb);
-            case"Ouest":
-                setX(getX()-nb);
-        }}
-    public void droite(){
+    public void demiTour(){
+        for(int i=0;i<2;i++){
+            droite();
+        }
+    }*/
+    //solution2
+ /*   public void avance(int nb) {
+        switch (getDirection()) {
+            case "est":
+                setX(getX() + nb);
+                break;
+            case "sud":
+                setY(getY() - nb);
+                break;
+            case "nord":
+                setY(getY() + nb);
+                break;
+            case "ouest":
+                setX(getX() - nb);
+                break;
+        }
+    }*/
 
-        if(getDirection().equals("Nord"))
-            setDirection("Est");
-        if(getDirection().equals("Est"))
-            setDirection("Sud");
-        if(getDirection().equals("Est"))
-            setDirection("Ouest");
-        if(getDirection().equals("Ouest"))
-            setDirection("Nord"); }
-    public void demitour(){
+    public void droite() {
+        switch(getDirection()){
+            case "Nord":
+              setDirection("ouest");
+                break;
+            case "Est":
+               setDirection("Nord");
+                break;
+            case "Sud":
+               setDirection("Est");
+                break;
+            case "Ouest":
+                setDirection("Sud");
+                break;
+        }}
+
+    public void demiTour() {
         switch(getDirection()){
             case "Nord":
                 setDirection("Sud");
-            case "Ouest":
-                setDirection("Est");
-            case "Sud":
-                setDirection("Nord");
+                break;
             case "Est":
                 setDirection("Ouest");
+                break;
+            case "Sud":
+                setDirection("Nord");
+                break;
+            case "Ouest":
+                setDirection("Est");
+                break;
+        }}
+    //modification pour le mode turbo
+    public void avance(int nb) {
+        if(turbo.equals("on")){
+            nb=nb*3;
+        }
+        switch (getDirection()) {
+            case "Est":
+                setX(getX() + nb);
+                break;
+            case "Sud":
+                setY(getY() - nb);
+                break;
+            case "Nord":
+                setY(getY() + nb);
+                break;
+            case "Ouest":
+                setX(getX() - nb);
+                break;
         }
     }
-    public void affiche(String turbo,int nb){
-        if(turbo=="ON"){
-            avance(nb*3);
-            if(turbo=="OFF"){
-                avance();
-            }
-        }
-    }
-}
+    public void affiche(){
+        if(turbo.equals("on"))
+        System.out.println("le robot est "+ getNom() +" sa position est "+ "(" + getX() +","+ getY()+")"+" sa direction est "+
+                getDirection()+"le robot est au mode turbo");
+    if(turbo.equals("off"))
+        System.out.println("le robot est "+ getNom() +" sa position est "+ "(" + getX() +","+ getY()+")"+" sa direction est "+
+                getDirection()+" le mode turbo est désactiver");
+
+    }}
